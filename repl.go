@@ -1,8 +1,33 @@
 package main
 
 import (
+	"fmt"
+	"bufio"
+	"os"
 	"strings"
 )
+
+func startREPL() {
+
+	scanner := bufio.NewScanner(os.Stdin)
+	for {
+		fmt.Print("Pokedex > ")
+		scanner.Scan()
+		userInput := scanner.Text()
+		if len(userInput) == 0 {
+			continue
+		}
+		cleanedInput := cleanInput(userInput)
+		command := cleanedInput[0]
+
+		function, err := loadCommands()[command]
+		if err != true {
+			fmt.Println("Unknown command")
+			continue
+		}
+		function.callback()
+	}
+}
 
 func cleanInput(text string) []string {
 	cleaned := strings.TrimSpace(text)
