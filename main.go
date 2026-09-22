@@ -1,5 +1,7 @@
 package main
 
 func main() {
-	startREPL()
+	var conf config
+	conf.commands = loadCommands()
+	startREPL(&conf)
 }

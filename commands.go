@@ -8,24 +8,22 @@ import (
 type cliCommand struct {
 	name string
 	description string
-	callback func() error
+	callback func(*config) error
 }
 
-func commandExit() error {
+func commandExit(conf *config) error {
 	fmt.Println("Closing the Pokedex... Goodbye!")
 	os.Exit(0)
 	return nil
 }
 
-func commandHelp() error {
+func commandHelp(conf *config) error {
 	fmt.Println("Welcome to the Pokedex!")
 	fmt.Println("Usage:\n")
 
-	for _, c := range loadCommands() {
+	for _, c := range conf.commands {
 		fmt.Printf("%s: %s\n", c.name, c.description)
 	}
-	//fmt.Println("exit: Exit the Pokedex")
-	//fmt.Println("help: Displays a help message")
 	return nil
 }
 

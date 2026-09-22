@@ -7,7 +7,7 @@ import (
 	"strings"
 )
 
-func startREPL() {
+func startREPL(conf *config) {
 
 	scanner := bufio.NewScanner(os.Stdin)
 	for {
@@ -25,7 +25,7 @@ func startREPL() {
 			fmt.Println("Unknown command")
 			continue
 		}
-		function.callback()
+		function.callback(conf)
 	}
 }
 
